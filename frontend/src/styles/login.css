@@ -1,0 +1,7 @@
+.authTitle {
+  @apply text-3xl font-bold text-gray-700;
+}
+
+.form {
+  @apply flex flex-col items-center justify-center w-9/12;
+}

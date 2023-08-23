@@ -1,6 +1,15 @@
 import { Request, Response } from "express";
 import NoteModel from "../models/notes.models";
 
+export const allNotes = async (req: Request, res: Response) => {
+  try {
+    const notes = await NoteModel.find();
+    res.json(notes);
+  } catch (error) {
+    res.json({ message: error });
+  }
+};
+
 export const createNote = async (req: Request, res: Response) => {
   try {
     const newNote = new NoteModel(req.body);
