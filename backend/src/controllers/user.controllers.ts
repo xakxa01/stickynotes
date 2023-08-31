@@ -1,9 +1,13 @@
 import { Request, Response } from "express";
-import UserModel from "../models/user.models";
+import {
+  findUserById,
+  findUserByIdAndDelete,
+  findUserByIdAndUpdate,
+} from "../actions/user.actions";
 
 export const getUser = async (req: Request, res: Response) => {
   try {
-    const user = await UserModel.findById(req.params.id);
+    const user = await findUserById(req.params.id);
     res.json(user);
   } catch (error) {
     res.json({ message: error });
@@ -13,7 +17,7 @@ export const getUser = async (req: Request, res: Response) => {
 
 export const updateUser = async (req: Request, res: Response) => {
   try {
-    const user = await UserModel.findByIdAndUpdate(req.params.id, req.body, {
+    const user = await findUserByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
     res.json(user);
@@ -25,7 +29,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
 export const deleteUser = async (req: Request, res: Response) => {
   try {
-    const user = await UserModel.findByIdAndDelete(req.params.id);
+    const user = await findUserByIdAndDelete(req.params.id);
     res.json("user delete");
   } catch (error) {
     res.json({ message: error });

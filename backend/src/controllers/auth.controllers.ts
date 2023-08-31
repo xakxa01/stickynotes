@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import UserModel from "../models/user.models";
 import bcrypt from "bcryptjs";
 import { createAccessToken } from "../libs/jwt";
+import { createUser, findUser } from "../actions/user.actions";
 
 export const register = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
     const passwordHash = await bcrypt.hash(password, 10); // encrypt password
-    const newUser = new UserModel({ email, password: passwordHash });
+    const newUser = createUser({ email, password: passwordHash });
     const userSaved = await newUser.save();
 
     const token = await createAccessToken({ id: userSaved._id }); // create token
@@ -28,7 +28,7 @@ export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
-    const userFound = await UserModel.findOne({ email }); // find user by email
+    const userFound = await findUser({ email }); // find user by email
     if (!userFound) return res.status(400).json({ message: "User not found" });
 
     const isMatch = await bcrypt.compare(password, userFound.password); // compare password with passwordHash

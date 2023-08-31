@@ -1,0 +1,7 @@
+.notes-container {
+  @apply h-screen w-screen flex flex-col items-center;
+}
+
+.notes {
+  @apply grid grid-cols-5 gap-3 m-10;
+}

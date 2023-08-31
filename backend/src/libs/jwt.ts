@@ -14,6 +14,6 @@ export const createAccessToken = (payload: IPayload) =>
       (err, token) => {
         if (err) reject(err);
         resolve(token);
-      }
-    )
+      },
+    ),
   );

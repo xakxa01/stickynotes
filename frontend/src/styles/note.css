@@ -1,0 +1,15 @@
+.note-cardHeader {
+  @apply pb-0 pt-2 px-4 flex flex-col items-start;
+}
+
+.note-title {
+  @apply text-tiny uppercase font-bold;
+}
+
+.note-cardBody {
+  @apply overflow-visible py-2;
+}
+
+.note-iconStyle {
+  @apply flex items-center justify-center w-8 h-8 rounded-full bg-default-100 hover:bg-default-200 mx-1;
+}

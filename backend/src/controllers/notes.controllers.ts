@@ -1,9 +1,15 @@
 import { Request, Response } from "express";
-import NoteModel from "../models/notes.models";
+import {
+  createNewNote,
+  findAllNotes,
+  findNoteById,
+  findNoteByIdAndDelete,
+ findNoteByIdAndUpdate,
+} from "../actions/notes.actions";
 
 export const allNotes = async (req: Request, res: Response) => {
   try {
-    const notes = await NoteModel.find();
+    const notes = await findAllNotes();
     res.json(notes);
   } catch (error) {
     res.json({ message: error });
@@ -12,7 +18,7 @@ export const allNotes = async (req: Request, res: Response) => {
 
 export const createNote = async (req: Request, res: Response) => {
   try {
-    const newNote = new NoteModel(req.body);
+    const newNote = createNewNote(req.body);
     await newNote.save();
     res.status(200).json(newNote);
   } catch (error) {
@@ -22,7 +28,7 @@ export const createNote = async (req: Request, res: Response) => {
 
 export const getNote = async (req: Request, res: Response) => {
   try {
-    const note = await NoteModel.findById(req.params.id);
+    const note = await findNoteById(req.params.id);
     res.json(note);
   } catch (error) {
     res.status(500).json({ message: error });
@@ -32,7 +38,7 @@ export const getNote = async (req: Request, res: Response) => {
 
 export const updateNote = async (req: Request, res: Response) => {
   try {
-    const note = await NoteModel.findByIdAndUpdate(req.params.id, req.body, {
+    const note = await findNoteByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
 
@@ -45,7 +51,7 @@ export const updateNote = async (req: Request, res: Response) => {
 
 export const deleteNote = async (req: Request, res: Response) => {
   try {
-    await NoteModel.findByIdAndDelete(req.params.id);
+    await findNoteByIdAndDelete(req.params.id);
     res.json("note delete");
   } catch (error) {
     res.json({ message: error });

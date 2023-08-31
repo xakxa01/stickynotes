@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/sortable": "^7.0.2",
     "@nextui-org/react": "^2.1.5",
     "@tabler/icons-react": "^2.32.0",
     "framer-motion": "^10.16.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
